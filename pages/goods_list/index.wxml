@@ -3,7 +3,7 @@
   <navigator url="">
     <view class="search">
       <view class="search-input">
-        <icon type="search" size="20" /> 小米
+        <icon type="search" size="20" /> {{keyword}}
       </view>
     </view>
   </navigator>
