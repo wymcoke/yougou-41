@@ -4,7 +4,11 @@ Page({
     // 轮播图的数据
     banners: [],
     // 菜单的数组
-    menus: []
+    menus: [],
+    // 楼层的数据
+    floors: [],
+    // 是否显示回到顶部
+    isShowTop: false
   },
   onLoad() {
     // 请求轮播图接口
@@ -25,7 +29,9 @@ Page({
       url: "/home/catitems"
     }).then(res => {
       // message是菜单的数组
-      const { message } = res.data;
+      const {
+        message
+      } = res.data;
 
       // 循环添加跳转链接
       const newData = message.map((v, i) => {
@@ -41,6 +47,27 @@ Page({
       this.setData({
         menus: newData
       })
+    });
+
+    // 请求楼层数据
+    request({
+      url: "/home/floordata"
+    }).then(res => {
+      const {
+        message
+      } = res.data;
+      // 赋值给楼层的数组
+      this.setData({
+        floors: message
+      });
     })
-  }
+  },
+
+  // 小程序回到顶部
+  handleToTop() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
+    })
+  },
 })
